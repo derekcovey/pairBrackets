@@ -5,7 +5,7 @@ let brackets = [
 ]
 
 const returnBracketPair = () => {
-    if (getRandom(3) === 1) {
+    if (getRandom(4) === 1) {
         return `${brackets[0].open}${brackets[0].close}`
     } else if(getRandom(4) !== 1 && getRandom(4) === 2){
         return `${brackets[1].open}${brackets[1].close}`
@@ -18,20 +18,17 @@ const getRandom = (max) => {
     return Math.floor((Math.random() * max) +1)
 }
 
-
-let output = '';
-
-const generateString = (n) => {
+const generateString = (n, output = '') => {
     if(output.length > n * 2 - 1) return output;
 
     if(output.length <= 0){
         output += returnBracketPair();
-        return generateString(n);
+        return generateString(n, output);
     } else  {
         output = output.split('');
         output.splice(getRandom(output.length), 0, returnBracketPair());
         output = output.join('');
-        return generateString(n)
+        return generateString(n, output)
     }
 }
 
@@ -64,8 +61,8 @@ const checkString = (string) => {
 }
 
 for (let i = 0; i < 50; i++) {
-    output = '';
+    // output = '';
     let huy = generateString(20);
-    console.log(huy,'   ', checkString(huy));
+    console.log(huy);
     i++;
 }
